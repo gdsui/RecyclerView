@@ -9,25 +9,26 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.motion.recyclerview.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    private ActivityMainBinding binding;
     private List<User> list;
     private UserAdapter adapter;
-    private FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        recyclerView=findViewById(R.id.recyclerUser);
-        fab=findViewById(R.id.fabAdd);
-     
-        fab.setOnClickListener(new View.OnClickListener() {
+        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
+        binding.fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,SecondActivity.class);
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             list.add(user);
         }
         adapter=new UserAdapter(list);
-        recyclerView.setAdapter(adapter);
+        binding.recyclerUser.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
     }
